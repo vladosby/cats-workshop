@@ -17,4 +17,22 @@ object TypeClassExample extends App {
     implicit val validatorInt: Validator[Int] = i => Either.cond(i > 0, i, List("Int cannot be less than 0"))
   }
 
+  // Type class interface
+  object ValidatorInterface {
+
+    implicit final class ValidatorWrapper[A: Validator](v: A) {
+      def validate: Either[List[String], A] = implicitly[Validator[A]].validate(v)
+    }
+
+  }
+
+  //examples
+  import ValidatorInstances._
+  import ValidatorInterface._
+
+  println(2.validate)
+  println((-2).validate)
+  println(Cat("2", -2).validate)
+  println(Cat("2", 2).validate)
+
 }

@@ -26,13 +26,27 @@ object TypeClassExample extends App {
 
   }
 
+  // implicit resolution
+  object RecursiveResolution {
+    implicit def optionValidator[A: Validator]: Validator[Option[A]] = {
+      case Some(v) => implicitly[Validator[A]].validate(v).map(Some(_))
+      case None => Left(List("Cannot validate None"))
+    }
+  }
+
   //examples
   import ValidatorInstances._
   import ValidatorInterface._
+  import RecursiveResolution._
 
   println(2.validate)
   println((-2).validate)
   println(Cat("2", -2).validate)
   println(Cat("2", 2).validate)
 
+
+  println(Option(Cat("2", 2)).validate)
+  println(Option(Cat("2", -2)).validate)
+  println(Option(2).validate)
+  println(Option(-2).validate)
 }

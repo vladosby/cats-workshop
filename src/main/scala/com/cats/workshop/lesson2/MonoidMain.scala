@@ -3,11 +3,6 @@ package com.cats.workshop.lesson2
 import Instance._
 import Syntax._
 
-case class Gold(startValue: Int, speed: Int, hours: Int)
-
-case class Money(amount: BigDecimal, currency: String) // semigroup???
-
-
 object MonoidMain extends App {
 
   def associativity[A: Monoid](a: A, b: A, c: A): Boolean = {

@@ -1,7 +1,7 @@
-package com.cats.workshop.lesson2
+package com.cats.workshop.lesson2.my
 
-import Instance._
-import Syntax._
+import com.cats.workshop.lesson2.my.Instance._
+import com.cats.workshop.lesson2.my.Syntax._
 
 object MonoidMain extends App {
 
